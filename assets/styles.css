@@ -49,11 +49,12 @@ button{font:inherit}
 .demo-bar-dot{color:var(--blue)}
 
 .site-header{
-  position:absolute;
-  left:0;right:0;
-  top:34px;
-  z-index:30;
-  border-bottom:1px solid rgba(255,255,255,.13);
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(7,10,13,.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
 .nav-wrap{
   min-height:88px;
@@ -117,10 +118,10 @@ button{font:inherit}
 }
 .hero-grid{
   position:relative;z-index:3;
-  padding-top:142px;
+  padding-top:30px;
   display:grid;grid-template-columns:1.35fr .65fr;gap:80px;align-items:center;
 }
-.hero-copy{max-width:730px;padding:72px 0 65px}
+.hero-copy{max-width:730px;padding:70px 0 65px}
 .eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:900;color:var(--blue-2);
@@ -275,7 +276,6 @@ button{font:inherit}
 .mobile-cta{display:none}
 
 @media (max-width:980px){
-  .site-header{top:52px}
   .demo-bar{min-height:52px;text-align:center;flex-wrap:wrap;gap:4px 9px}
   .nav-wrap{min-height:76px}
   .menu-toggle{display:block;z-index:5}
@@ -288,7 +288,7 @@ button{font:inherit}
   .primary-nav>a:not(.btn)::after{display:none}
   .primary-nav .btn{margin-top:22px;width:100%}
   .hero{min-height:auto}
-  .hero-grid{grid-template-columns:1fr;padding-top:150px;gap:0}
+  .hero-grid{grid-template-columns:1fr;padding-top:20px;gap:0}
   .hero-copy{padding:80px 0 34px}
   .hero-card{max-width:530px;margin:0 0 60px}
   .trust-grid{grid-template-columns:repeat(2,1fr)}
@@ -310,7 +310,7 @@ button{font:inherit}
   .brand-copy span{font-size:9px}
   .section{padding:78px 0}
   .hero-overlay{background:linear-gradient(90deg,rgba(4,7,10,.96),rgba(4,7,10,.76))}
-  .hero-grid{padding-top:130px}
+  .hero-grid{padding-top:15px}
   .hero-copy{padding:70px 0 30px}
   .hero h1{font-size:55px}
   .hero-lead{font-size:17px}
@@ -381,4 +381,333 @@ button{font:inherit}
   .service-grid-five .service-card:nth-child(5){
     grid-column:auto;
   }
+}
+
+
+/* ===== v3: Carolinas + Oregon expansion ===== */
+.expansion-banner{
+  background:linear-gradient(90deg,#d9a23c,#f0c66c);
+  color:#15120b;
+  position:relative;
+  z-index:45;
+}
+.expansion-banner[hidden]{display:none}
+.expansion-banner-inner{
+  min-height:54px;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:22px;
+  align-items:center;
+}
+.expansion-banner-copy{
+  display:flex;
+  gap:15px;
+  align-items:center;
+  flex-wrap:wrap;
+  font-size:12px;
+}
+.expansion-banner-copy strong{
+  font-size:12px;
+  letter-spacing:.065em;
+}
+.expansion-banner-copy span{opacity:.78}
+.expansion-banner-link{
+  font-size:12px;
+  font-weight:900;
+  text-decoration:underline;
+  text-underline-offset:4px;
+  white-space:nowrap;
+}
+.banner-close{
+  width:30px;height:30px;border:0;border-radius:50%;
+  background:rgba(0,0,0,.08);font-size:21px;line-height:1;
+  cursor:pointer;color:inherit;
+}
+.banner-close:hover{background:rgba(0,0,0,.15)}
+
+.hero{min-height:720px}
+.hero-proof>div:first-child strong{color:var(--blue-2)}
+.trust-icon:has(+ span){font-size:12px}
+.trust-grid>div:first-child .trust-icon{
+  letter-spacing:.08em;
+  color:#f3ae2b;
+}
+
+.service-grid-five .service-content p{margin-bottom:28px}
+.service-grid-five .service-link{margin-top:auto}
+
+.review-scoreboard{
+  display:grid;
+  grid-template-columns:1.4fr .6fr;
+  gap:18px;
+  margin-bottom:64px;
+}
+.review-score-main,.review-score-secondary{
+  border-radius:24px;
+  border:1px solid var(--line);
+}
+.review-score-main{
+  background:var(--ink);
+  color:#fff;
+  padding:42px;
+  position:relative;
+  overflow:hidden;
+}
+.review-score-main::after{
+  content:"★★★★★";
+  position:absolute;
+  right:-16px;
+  bottom:-26px;
+  font-size:94px;
+  letter-spacing:-.02em;
+  color:rgba(255,255,255,.035);
+  white-space:nowrap;
+}
+.review-rating{
+  font-size:74px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.055em;
+  margin:25px 0 5px;
+}
+.review-rating span{
+  color:#f3ae2b;
+  font-size:23px;
+  letter-spacing:.08em;
+  vertical-align:middle;
+}
+.review-score-main>strong{font-size:20px}
+.review-score-main>p{
+  max-width:620px;
+  color:#aeb9c2;
+  margin:15px 0 0;
+}
+.review-score-secondary{
+  background:#f5f7f8;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:38px;
+}
+.review-score-secondary>span{
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+}
+.review-score-secondary strong{
+  font-size:48px;
+  line-height:1;
+  margin:15px 0 8px;
+}
+.review-score-secondary p{margin:0;color:var(--muted)}
+.review-heading{margin-bottom:34px}
+.review-theme{
+  display:inline-flex;
+  color:var(--blue-dark)!important;
+  font-size:11px!important;
+  letter-spacing:.14em!important;
+  font-weight:900!important;
+}
+.review-card{min-height:210px}
+.review-card p{margin:20px 0 0}
+.review-actions{flex-wrap:wrap}
+
+.locations-section{background:#eef2f4}
+.market-grid{
+  display:grid;
+  grid-template-columns:.78fr 1.22fr;
+  gap:24px;
+}
+.market-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 14px 45px rgba(11,15,20,.07);
+}
+.carolinas-card{
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+}
+.market-card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.market-status{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  border-radius:99px;
+  padding:0 11px;
+  font-size:10px;
+  letter-spacing:.12em;
+  font-weight:900;
+}
+.market-status.live{background:#daf3e5;color:#17613b}
+.market-status.soon{background:#fff0cf;color:#75500c}
+.market-code{
+  font-size:11px;
+  font-weight:900;
+  color:#7b8790;
+  letter-spacing:.15em;
+}
+.market-icon{
+  width:82px;height:82px;border-radius:22px;
+  background:var(--ink);color:var(--blue-2);
+  display:grid;place-items:center;
+  font-weight:900;font-size:35px;
+  margin:58px 0 26px;
+}
+.market-kicker{
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--blue-dark);
+  font-size:11px;
+  font-weight:900;
+}
+.market-card h3{
+  font-size:45px;
+  letter-spacing:-.045em;
+  margin:7px 0 12px;
+}
+.market-card p{color:var(--muted);margin:0}
+.market-proof{
+  display:flex;
+  gap:24px;
+  flex-wrap:wrap;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:18px 0;
+  margin:28px 0;
+  color:#5c6770;
+  font-size:13px;
+}
+.market-proof strong{color:var(--ink);font-size:19px;margin-right:4px}
+.carolinas-card .btn{margin-top:auto;align-self:flex-start}
+
+.oregon-card{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+}
+.oregon-flyer-wrap{
+  background:#070a0d;
+  min-height:610px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.oregon-flyer-wrap img{
+  width:100%;
+  height:auto;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.24);
+}
+.oregon-copy{padding:34px}
+.city-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:25px 0 30px;
+}
+.city-list span{
+  background:#f1f4f6;
+  border:1px solid #dfe5e9;
+  border-radius:99px;
+  padding:7px 11px;
+  font-size:12px;
+  font-weight:800;
+}
+.oregon-demo-form{
+  border-top:1px solid var(--line);
+  padding-top:25px;
+}
+.oregon-demo-form label{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px;
+}
+.form-row input{
+  width:100%;
+  min-height:52px;
+  border:1px solid #cfd7dc;
+  border-radius:12px;
+  padding:0 14px;
+  font:inherit;
+  outline:none;
+}
+.form-row input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(54,169,225,.12);
+}
+.form-note,.form-success{
+  font-size:11px!important;
+  margin-top:9px!important;
+}
+.form-success{
+  color:#17613b!important;
+  font-weight:800;
+}
+.spelling-note{
+  margin-top:22px;
+  padding:18px 20px;
+  border-left:4px solid #d9a23c;
+  background:#fff;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:18px;
+  align-items:start;
+  font-size:12px;
+}
+.spelling-note>span{
+  font-size:10px;
+  letter-spacing:.12em;
+  font-weight:900;
+  color:#75500c;
+}
+.spelling-note p{margin:0;color:#59646d}
+
+@media (max-width:980px){
+  .expansion-banner-inner{
+    grid-template-columns:1fr auto;
+    padding:10px 0;
+  }
+  .expansion-banner-copy{display:grid;gap:2px}
+  .expansion-banner-link{grid-column:1}
+  .banner-close{grid-column:2;grid-row:1 / span 2}
+  .review-scoreboard,.market-grid{grid-template-columns:1fr}
+  .oregon-card{grid-template-columns:1fr 1fr}
+  .oregon-flyer-wrap{min-height:0}
+}
+@media (max-width:680px){
+  .expansion-banner-inner{
+    grid-template-columns:1fr auto;
+    gap:8px;
+    padding:11px 0;
+  }
+  .expansion-banner-copy strong{line-height:1.25}
+  .expansion-banner-copy span{font-size:10px}
+  .expansion-banner-link{font-size:10px}
+  .hero{min-height:auto}
+  .review-score-main,.review-score-secondary{padding:27px}
+  .review-rating{font-size:58px}
+  .review-rating span{display:block;margin-top:10px}
+  .oregon-card{grid-template-columns:1fr}
+  .oregon-flyer-wrap{padding:14px}
+  .oregon-copy{padding:26px}
+  .market-card h3{font-size:39px}
+  .market-icon{margin-top:38px}
+  .form-row{grid-template-columns:1fr}
+  .spelling-note{grid-template-columns:1fr;gap:7px}
 }

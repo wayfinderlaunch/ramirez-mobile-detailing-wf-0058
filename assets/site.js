@@ -1,23 +1,7 @@
-/*
-  Ramirez Mobile Detailing demo
-  Real Square Appointments URLs supplied from the business's current booking flow.
-  Each service CTA opens the matching Square service directly.
+/* Ramirez Mobile Detailing demo — Wayfinder Launch
+   Temporary demo tracking. Remove the GA block in index.html and this event
+   instrumentation before final customer handoff.
 */
-const BOOKING_LINKS = {
-  all: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services",
-  express: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services/QRIG4WQFSRD322G7QLNCF4QP",
-  deluxe: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services/LJTUBXSWVV677IQ3WLCXRWMX",
-  expressInterior: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services/NRYWK5A5WVLCTM4GPMLIF7PC",
-  deluxeInterior: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services/664YLDRZ6LZLNNAIEHJ5P7SS",
-  exterior: "https://book.squareup.com/appointments/lp3tsnwxxeqqa2/location/L4RYMN0M32JNJ/services/M224S3OVEOJNNHPXUYFWZDAW"
-};
-
-document.querySelectorAll(".booking-link").forEach((link) => {
-  const key = link.dataset.bookingKey || "all";
-  link.href = BOOKING_LINKS[key] || BOOKING_LINKS.all;
-  link.target = "_blank";
-  link.rel = "noopener";
-});
 
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("#primary-nav");
@@ -38,19 +22,31 @@ if (menuToggle && nav) {
   });
 }
 
-document.getElementById("year").textContent = new Date().getFullYear();
-
 function sendEvent(eventName, params = {}) {
   if (typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
   }
 }
 
+/* Highest-value conversion: click from the marketing site into Square. */
+document.querySelectorAll(".booking-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    sendEvent("click_to_book", {
+      link_location: link.dataset.linkLocation || "unknown",
+      link_url: link.href,
+      booking_platform: "square",
+      booking_service: link.dataset.bookingService || "all",
+      market: "carolinas"
+    });
+  });
+});
+
 document.querySelectorAll(".track-call").forEach((link) => {
   link.addEventListener("click", () => {
     sendEvent("click_to_call", {
       link_location: link.dataset.linkLocation || "unknown",
-      link_url: link.href
+      link_url: link.href,
+      market: "carolinas"
     });
   });
 });
@@ -64,19 +60,7 @@ document.querySelectorAll(".track-email").forEach((link) => {
   });
 });
 
-document.querySelectorAll(".booking-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    sendEvent("click_to_book", {
-      link_location: link.dataset.linkLocation || "unknown",
-      link_url: link.href,
-      booking_platform: "square",
-      booking_service: link.dataset.bookingKey || "all"
-    });
-  });
-});
-
-document.querySelectorAll('a[target="_blank"]').forEach((link) => {
-  if (link.classList.contains("booking-link")) return;
+document.querySelectorAll(".external-track").forEach((link) => {
   link.addEventListener("click", () => {
     sendEvent("outbound_link_click", {
       link_location: link.dataset.linkLocation || "unknown",
@@ -84,3 +68,30 @@ document.querySelectorAll('a[target="_blank"]').forEach((link) => {
     });
   });
 });
+
+/* Expansion promo banner is intentionally editable/dismissible. */
+const promo = document.querySelector("#expansion-banner");
+const promoClose = document.querySelector(".banner-close");
+if (promo && promoClose) {
+  promoClose.addEventListener("click", () => {
+    promo.hidden = true;
+    sendEvent("promo_banner_dismiss", {
+      promotion: "oregon_expansion"
+    });
+  });
+}
+
+/* Demo-only Oregon waitlist interaction. No personal data is sent anywhere. */
+const oregonForm = document.querySelector("#oregon-demo-form");
+const oregonSuccess = document.querySelector("#oregon-form-success");
+if (oregonForm) {
+  oregonForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    sendEvent("oregon_launch_interest", {
+      market: "oregon",
+      form_mode: "demo_only"
+    });
+    if (oregonSuccess) oregonSuccess.hidden = false;
+    oregonForm.reset();
+  });
+}
