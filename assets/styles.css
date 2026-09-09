@@ -711,3 +711,55 @@ button{font:inherit}
   .form-row{grid-template-columns:1fr}
   .spelling-note{grid-template-columns:1fr;gap:7px}
 }
+
+
+/* ===== v4 refinements ===== */
+.brand-image{display:flex;align-items:center}
+.brand-logo-header{
+  display:block;
+  width:210px;
+  height:auto;
+}
+.brand-logo-footer{
+  display:block;
+  width:230px;
+  height:auto;
+}
+.brand-footer{display:inline-flex}
+.market-logo-panel{
+  margin:26px 0 26px;
+  min-height:150px;
+  background:linear-gradient(180deg,#0c1015,#111820);
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.market-logo{
+  width:min(100%, 270px);
+  height:auto;
+  display:block;
+}
+.hero-proof strong:not(:first-child){font-size:19px}
+.hero-proof div:nth-child(2) strong,
+.hero-proof div:nth-child(3) strong{color:#fff}
+
+.review-score-main .eyebrow.dark{color:var(--blue-2)}
+.review-score-secondary>span{color:var(--ink)}
+
+.market-code{
+  font-size:10px;
+  letter-spacing:.14em;
+}
+.market-card p{font-size:15px;line-height:1.6}
+.oregon-copy p{max-width:560px}
+
+@media (max-width:980px){
+  .brand-logo-header{width:182px}
+}
+@media (max-width:680px){
+  .brand-logo-header{width:160px}
+  .brand-logo-footer{width:190px}
+  .market-logo-panel{min-height:122px;padding:18px}
+}
