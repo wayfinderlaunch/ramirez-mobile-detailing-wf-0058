@@ -1,0 +1,384 @@
+/* Ramirez Mobile Detailing demo — Wayfinder Launch */
+:root{
+  --ink:#0b0f14;
+  --ink-2:#111820;
+  --ink-3:#1a232d;
+  --paper:#f5f7f8;
+  --white:#fff;
+  --muted:#67727d;
+  --line:#dfe4e8;
+  --blue:#36a9e1;
+  --blue-2:#57c7ff;
+  --blue-dark:#1677a6;
+  --shadow:0 22px 70px rgba(11,15,20,.12);
+  --radius:22px;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--white);
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height:1.55;
+}
+body.menu-open{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+.skip-link{
+  position:absolute;left:-999px;top:8px;padding:10px 14px;background:#fff;color:#000;z-index:9999;
+}
+.skip-link:focus{left:8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.demo-bar{
+  min-height:34px;
+  background:#070a0d;
+  color:#9ca9b4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:8px 16px;
+  font-size:12px;
+  letter-spacing:.03em;
+}
+.demo-bar-dot{color:var(--blue)}
+
+.site-header{
+  position:absolute;
+  left:0;right:0;
+  top:34px;
+  z-index:30;
+  border-bottom:1px solid rgba(255,255,255,.13);
+}
+.nav-wrap{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+.brand{display:inline-flex;align-items:center;gap:12px;color:#fff}
+.brand-mark{
+  width:49px;height:49px;border:1px solid rgba(255,255,255,.25);border-radius:13px;
+  display:grid;place-items:center;background:rgba(255,255,255,.05);backdrop-filter:blur(10px);
+}
+.brand-mark svg{width:37px;height:37px;fill:var(--blue-2)}
+.brand-copy{display:grid;line-height:1}
+.brand-copy strong{font-size:20px;letter-spacing:.15em}
+.brand-copy span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#c7d0d8;margin-top:5px}
+.primary-nav{display:flex;align-items:center;gap:26px;color:#e8edf1;font-size:14px;font-weight:700}
+.primary-nav>a:not(.btn){position:relative;padding:33px 0}
+.primary-nav>a:not(.btn)::after{
+  content:"";position:absolute;left:0;bottom:24px;height:2px;width:0;background:var(--blue-2);transition:.2s ease;
+}
+.primary-nav>a:not(.btn):hover::after{width:100%}
+.menu-toggle{display:none;background:none;border:0;padding:8px;color:#fff}
+.menu-toggle span:not(.sr-only){display:block;width:26px;height:2px;background:currentColor;margin:5px 0}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:52px;padding:0 22px;border-radius:12px;border:1px solid transparent;
+  font-weight:800;font-size:14px;letter-spacing:.01em;transition:.2s ease;cursor:pointer;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--blue);color:#061018;box-shadow:0 12px 30px rgba(54,169,225,.22)}
+.btn-primary:hover{background:var(--blue-2)}
+.btn-ghost{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.05)}
+.btn-ghost:hover{background:rgba(255,255,255,.11)}
+.btn-outline{border-color:#bdc6cd;color:var(--ink);background:#fff}
+.btn-outline:hover{border-color:var(--ink)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-light{background:#fff;border-color:#dfe4e8}
+.btn-sm{min-height:42px;padding:0 17px;border-radius:10px}
+
+.hero{
+  min-height:780px;
+  color:#fff;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+.hero-media,.final-cta-media{
+  position:absolute;inset:0;
+  background-image:url("https://images.pexels.com/photos/6873121/pexels-photo-6873121.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6873121.jpg&fm=jpg");
+  background-size:cover;background-position:center 38%;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 72% 50%,rgba(54,169,225,.12),transparent 28%),
+    linear-gradient(90deg,rgba(4,7,10,.97) 0%,rgba(4,7,10,.88) 42%,rgba(4,7,10,.46) 71%,rgba(4,7,10,.60) 100%);
+}
+.hero-grid{
+  position:relative;z-index:3;
+  padding-top:142px;
+  display:grid;grid-template-columns:1.35fr .65fr;gap:80px;align-items:center;
+}
+.hero-copy{max-width:730px;padding:72px 0 65px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:900;color:var(--blue-2);
+}
+.eyebrow::before{content:"";width:30px;height:2px;background:currentColor}
+.eyebrow.dark{color:var(--blue-dark)}
+.hero h1{
+  margin:18px 0 22px;
+  font-size:clamp(54px,7vw,92px);
+  letter-spacing:-.055em;line-height:.9;
+  max-width:820px;
+}
+.hero h1 em{font-style:normal;color:var(--blue-2)}
+.hero-lead{font-size:20px;line-height:1.6;color:#d7dee4;max-width:670px;margin:0}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:34px}
+.hero-proof{
+  display:flex;gap:42px;flex-wrap:wrap;
+  padding-top:42px;margin-top:44px;border-top:1px solid rgba(255,255,255,.15);
+}
+.hero-proof div{display:grid;gap:2px}
+.hero-proof strong{font-size:21px}
+.hero-proof span{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#aeb9c2}
+
+.hero-card{
+  align-self:end;margin-bottom:68px;
+  background:rgba(13,19,25,.82);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:20px;padding:28px;box-shadow:0 30px 70px rgba(0,0,0,.25);
+}
+.hero-card-top{display:flex;align-items:center;gap:9px;color:#cdd6dd;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
+.status-dot{width:9px;height:9px;border-radius:50%;background:var(--blue-2);box-shadow:0 0 0 5px rgba(87,199,255,.12)}
+.hero-card h2{font-size:30px;line-height:1.12;letter-spacing:-.035em;margin:22px 0 14px}
+.hero-card p{color:#b9c3ca;font-size:14px;margin:0 0 22px}
+.text-link{font-weight:900;color:var(--blue-2);display:inline-flex;gap:8px;align-items:center}
+.text-link span{transition:.2s ease}
+.text-link:hover span{transform:translate(3px,-2px)}
+
+.trust-strip{background:var(--ink);color:#d4dce2;border-top:1px solid rgba(255,255,255,.08)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);min-height:76px}
+.trust-grid>div{display:flex;align-items:center;justify-content:center;gap:10px;border-right:1px solid rgba(255,255,255,.08);font-size:13px;font-weight:800}
+.trust-grid>div:first-child{border-left:1px solid rgba(255,255,255,.08)}
+.trust-icon{color:var(--blue-2);font-weight:900}
+
+.section{padding:110px 0}
+.section-heading{margin-bottom:46px}
+.split-heading{display:grid;grid-template-columns:1fr .75fr;gap:60px;align-items:end}
+.section-heading h2,.why-copy h2,.area-copy h2,.final-cta h2{
+  font-size:clamp(39px,5vw,62px);line-height:.98;letter-spacing:-.05em;margin:13px 0 0;
+}
+.section-heading>p{color:var(--muted);font-size:17px;margin:0;max-width:600px}
+.centered{text-align:center;max-width:800px;margin-inline:auto;margin-bottom:48px}
+.centered .eyebrow{justify-content:center}
+.centered p{margin:18px auto 0;max-width:720px;color:var(--muted);font-size:17px}
+
+.services{background:var(--paper)}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.service-card{
+  background:#fff;border:1px solid #e4e8eb;border-radius:var(--radius);overflow:hidden;
+  transition:.25s ease;display:flex;flex-direction:column;
+}
+.service-card:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:#d2d9de}
+.service-image{height:255px;background-size:cover;background-position:center}
+.service-image-express{background-image:linear-gradient(rgba(0,0,0,.06),rgba(0,0,0,.2)),url("https://images.pexels.com/photos/6873121/pexels-photo-6873121.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6873121.jpg&fm=jpg")}
+.service-image-interior{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.18)),url("https://images.pexels.com/photos/6873185/pexels-photo-6873185.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6873185.jpg&fm=jpg");background-position:center}
+.service-image-deluxe{background-image:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.15)),url("https://images.pexels.com/photos/14231678/pexels-photo-14231678.jpeg?cs=srgb&dl=pexels-bylukemiller-14231678.jpg&fm=jpg")}
+.service-content{padding:28px;display:flex;flex-direction:column;flex:1}
+.service-kicker{text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:900;color:var(--blue-dark)}
+.service-content h3{font-size:29px;letter-spacing:-.035em;margin:7px 0 10px}
+.service-content p{color:var(--muted);font-size:14px;margin:0}
+.service-content ul{list-style:none;padding:0;margin:22px 0 24px;display:grid;gap:9px;color:#47515a;font-size:13px}
+.service-content li{padding-left:19px;position:relative}
+.service-content li::before{content:"✓";position:absolute;left:0;color:var(--blue-dark);font-weight:900}
+.service-link{margin-top:auto;padding-top:21px;border-top:1px solid var(--line);font-size:13px;font-weight:900;display:flex;justify-content:space-between;align-items:center}
+.service-link span{color:var(--blue-dark);font-size:17px;transition:.2s ease}
+.service-card:hover .service-link span{transform:translateX(4px)}
+.services-note{
+  margin-top:24px;border:1px solid #dce3e8;background:#fff;border-radius:16px;padding:18px 20px;
+  display:flex;gap:13px;align-items:flex-start;color:#56616a;font-size:13px;
+}
+.services-note p{margin:0}
+.services-note a{font-weight:900;color:var(--ink);text-decoration:underline;text-decoration-color:var(--blue);text-underline-offset:3px}
+.services-note-icon{width:23px;height:23px;border-radius:50%;background:#dff4fe;color:var(--blue-dark);font-weight:900;display:grid;place-items:center;flex:none}
+
+.dark-section{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.dark-section::before{
+  content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(87,199,255,.12);border-radius:50%;
+  top:-250px;right:-160px;box-shadow:0 0 0 80px rgba(87,199,255,.025),0 0 0 160px rgba(87,199,255,.018);
+}
+.why-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:85px;position:relative}
+.why-copy{padding-top:18px}
+.why-copy h2{font-size:50px}
+.why-copy p{font-size:17px;color:#aeb9c2;max-width:500px;margin:24px 0 30px}
+.benefit-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid rgba(255,255,255,.12);border-left:1px solid rgba(255,255,255,.12)}
+.benefit-grid article{padding:34px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);min-height:220px}
+.benefit-number{font-size:12px;font-weight:900;color:var(--blue-2);letter-spacing:.12em}
+.benefit-grid h3{font-size:24px;margin:48px 0 10px}
+.benefit-grid p{font-size:13px;color:#9eabb5;margin:0}
+
+.reviews{background:#fff}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review-card{border:1px solid var(--line);border-radius:18px;padding:29px;background:#fff;min-height:245px}
+.stars{color:#f3ae2b;letter-spacing:.12em;font-size:16px}
+.review-card p{font-size:17px;line-height:1.6;margin:22px 0 28px}
+.review-card span{font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:900}
+.review-actions{display:flex;justify-content:center;align-items:center;gap:28px;margin-top:35px}
+.dark-link{color:var(--ink)}
+
+.area-section{background:var(--paper);overflow:hidden}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.area-art{
+  height:460px;border-radius:28px;background:var(--ink);position:relative;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.area-art::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(115deg,transparent 25%,rgba(255,255,255,.04) 25%,rgba(255,255,255,.04) 25.4%,transparent 25.4%),
+    linear-gradient(20deg,transparent 48%,rgba(255,255,255,.035) 48%,rgba(255,255,255,.035) 48.5%,transparent 48.5%);
+}
+.map-ring{position:absolute;border:1px solid rgba(87,199,255,.23);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.ring-1{width:170px;height:170px}
+.ring-2{width:290px;height:290px}
+.ring-3{width:430px;height:430px}
+.map-pin{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50% 50% 50% 0;background:var(--blue);rotate:-45deg;box-shadow:0 0 0 12px rgba(54,169,225,.08)}
+.map-pin span{position:absolute;width:18px;height:18px;background:var(--ink);border-radius:50%;left:24px;top:24px}
+.map-label{position:absolute;left:50%;top:66%;transform:translateX(-50%);font-size:12px;font-weight:900;letter-spacing:.22em;color:#b9c6cf}
+.area-copy h2{font-size:52px;margin-top:15px}
+.area-copy p{font-size:17px;color:var(--muted);max-width:540px;margin:22px 0 30px}
+.area-buttons{display:flex;gap:11px;flex-wrap:wrap}
+
+.final-cta{min-height:590px;position:relative;color:#fff;display:flex;align-items:center;overflow:hidden}
+.final-cta-media{background-image:url("https://images.pexels.com/photos/6872172/pexels-photo-6872172.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6872172.jpg&fm=jpg");background-position:center}
+.final-cta-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,11,.96) 0%,rgba(5,8,11,.87) 48%,rgba(5,8,11,.35) 100%)}
+.final-cta-content{position:relative;z-index:2}
+.final-cta h2{font-size:61px;margin:16px 0}
+.final-cta p{font-size:17px;color:#c7d0d7;max-width:630px;margin:0}
+.final-actions{display:flex;align-items:center;gap:28px;margin-top:31px;flex-wrap:wrap}
+.phone-link{font-weight:900;font-size:18px;text-decoration:underline;text-decoration-color:var(--blue);text-underline-offset:5px}
+
+.site-footer{background:#070a0d;color:#a8b3bc;padding:70px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.6fr .65fr .65fr 1fr;gap:50px}
+.footer-brand .brand{margin-bottom:18px}
+.footer-brand p{font-size:13px;max-width:300px}
+.footer-col{display:flex;flex-direction:column;gap:10px;font-size:13px}
+.footer-col h3{color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.15em;margin:7px 0 7px}
+.footer-col a:hover{color:#fff}
+.footer-book p{font-size:12px;margin:0 0 10px}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);margin-top:48px;padding-top:23px;
+  display:flex;justify-content:space-between;gap:20px;font-size:11px;color:#72808a;
+}
+.mobile-cta{display:none}
+
+@media (max-width:980px){
+  .site-header{top:52px}
+  .demo-bar{min-height:52px;text-align:center;flex-wrap:wrap;gap:4px 9px}
+  .nav-wrap{min-height:76px}
+  .menu-toggle{display:block;z-index:5}
+  .primary-nav{
+    display:none;position:fixed;inset:52px 0 0 0;background:rgba(7,10,13,.98);padding:90px 28px 40px;
+    flex-direction:column;align-items:flex-start;font-size:21px;gap:0;
+  }
+  .primary-nav.open{display:flex}
+  .primary-nav>a:not(.btn){padding:16px 0;width:100%;border-bottom:1px solid rgba(255,255,255,.08)}
+  .primary-nav>a:not(.btn)::after{display:none}
+  .primary-nav .btn{margin-top:22px;width:100%}
+  .hero{min-height:auto}
+  .hero-grid{grid-template-columns:1fr;padding-top:150px;gap:0}
+  .hero-copy{padding:80px 0 34px}
+  .hero-card{max-width:530px;margin:0 0 60px}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-grid>div{min-height:64px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .split-heading,.why-grid,.area-grid{grid-template-columns:1fr;gap:44px}
+  .service-grid{grid-template-columns:1fr}
+  .service-card{display:grid;grid-template-columns:.8fr 1.2fr}
+  .service-image{height:100%}
+  .why-copy{max-width:680px}
+  .review-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+  .footer-book{grid-column:1/-1}
+}
+@media (max-width:680px){
+  .wrap{width:min(calc(100% - 28px),var(--max))}
+  .brand-mark{width:42px;height:42px}
+  .brand-mark svg{width:31px;height:31px}
+  .brand-copy strong{font-size:17px}
+  .brand-copy span{font-size:9px}
+  .section{padding:78px 0}
+  .hero-overlay{background:linear-gradient(90deg,rgba(4,7,10,.96),rgba(4,7,10,.76))}
+  .hero-grid{padding-top:130px}
+  .hero-copy{padding:70px 0 30px}
+  .hero h1{font-size:55px}
+  .hero-lead{font-size:17px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-proof{gap:25px;justify-content:space-between}
+  .hero-proof div{min-width:80px}
+  .hero-card{padding:23px}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .trust-grid>div{justify-content:flex-start;padding:0 13px;font-size:11px}
+  .section-heading h2,.why-copy h2,.area-copy h2,.final-cta h2{font-size:42px}
+  .split-heading{gap:20px}
+  .service-card{display:flex}
+  .service-image{height:225px}
+  .benefit-grid{grid-template-columns:1fr}
+  .benefit-grid article{min-height:180px}
+  .benefit-grid h3{margin-top:30px}
+  .review-actions{flex-direction:column}
+  .area-art{height:360px}
+  .ring-3{width:350px;height:350px}
+  .final-cta{min-height:560px;padding:70px 0}
+  .final-cta h2{font-size:44px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:35px}
+  .footer-brand,.footer-book{grid-column:1/-1}
+  .footer-bottom{flex-direction:column}
+  .site-footer{padding-bottom:92px}
+  .mobile-cta{
+    position:fixed;z-index:50;display:grid;grid-template-columns:1fr 1.2fr;left:0;right:0;bottom:0;
+    min-height:62px;box-shadow:0 -8px 28px rgba(0,0,0,.16);
+  }
+  .mobile-cta a{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  .mobile-call{background:#fff;color:var(--ink)}
+  .mobile-book{background:var(--blue);color:#061018}
+}
+
+
+/* Five-service layout using Ramirez's real Square service structure */
+.service-grid-five{
+  grid-template-columns:repeat(6,1fr);
+}
+.service-grid-five .service-card{
+  grid-column:span 2;
+}
+.service-grid-five .service-card:nth-child(4){
+  grid-column:2 / span 2;
+}
+.service-grid-five .service-card:nth-child(5){
+  grid-column:4 / span 2;
+}
+.service-image-deluxe-interior{
+  background-image:
+    linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.18)),
+    url("https://images.pexels.com/photos/6873185/pexels-photo-6873185.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6873185.jpg&fm=jpg");
+  background-position:center 62%;
+}
+.service-image-exterior{
+  background-image:
+    linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.18)),
+    url("https://images.pexels.com/photos/6872172/pexels-photo-6872172.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-6872172.jpg&fm=jpg");
+  background-position:center;
+}
+
+@media (max-width:980px){
+  .service-grid-five{
+    grid-template-columns:1fr;
+  }
+  .service-grid-five .service-card,
+  .service-grid-five .service-card:nth-child(4),
+  .service-grid-five .service-card:nth-child(5){
+    grid-column:auto;
+  }
+}
