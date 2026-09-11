@@ -763,3 +763,28 @@ button{font:inherit}
   .brand-logo-footer{width:190px}
   .market-logo-panel{min-height:122px;padding:18px}
 }
+
+
+/* ===== v5 RM mark logo refinement ===== */
+.brand-logo-header{
+  width:108px !important;
+}
+.brand-logo-footer{
+  width:120px !important;
+}
+.market-logo-panel{
+  min-height:138px !important;
+}
+.market-logo{
+  width:min(100%, 120px) !important;
+}
+
+@media (max-width:980px){
+  .brand-logo-header{width:96px !important}
+}
+@media (max-width:680px){
+  .brand-logo-header{width:86px !important}
+  .brand-logo-footer{width:98px !important}
+  .market-logo-panel{min-height:110px !important}
+  .market-logo{width:min(100%, 105px) !important}
+}
